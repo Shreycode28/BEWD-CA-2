@@ -11,25 +11,22 @@ app.get("/users", (req, res) => {
 });
 
 app.post("/signup", (req, res) => {
-  const { username, email, password, data_of_birth } = req.body;
+  const { email, password } = req.body;
 
   try {
-    if (!username) {
-      return res.json({ message: "Username  cannot be empty" });
-    } else if (!email) {
+    if (!email) {
       return res.json({ message: "Email cannot be empty" });
-    } else if (password.length < 8 || password.length > 16) {
+    } 
+    else if (!password) {
       return res.json({
         message:
-          "Password length should be greater than 8 or less than or equal to 16",
+          "Password cannot be empty",
       });
     }
 
     const new_user = {
-      username,
       email,
       password,
-      data_of_birth,
     };
 
     signup_page.push(new_user);
